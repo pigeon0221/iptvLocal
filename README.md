@@ -4,9 +4,9 @@
 
 **Self-hosted IPTV server for live TV and sports**
 
-[![Docker Pulls](https://img.shields.io/docker/pulls/rebelstream/iptv?style=for-the-badge&color=2496ED)](https://hub.docker.com/r/rebelstream/iptv)
-[![Docker Image Size](https://img.shields.io/docker/image-size/rebelstream/iptv/latest?style=for-the-badge&color=1D63ED)](https://hub.docker.com/r/rebelstream/iptv)
-[![GitHub Release](https://img.shields.io/github/v/release/rebelstream/iptv?style=for-the-badge&color=22C55E)](https://github.com/rebelstream/iptv/releases/latest)
+[![Docker Pulls](https://img.shields.io/docker/pulls/rebeliptv/iptv?style=for-the-badge&color=2496ED)](https://hub.docker.com/r/rebeliptv/iptv)
+[![Docker Image Size](https://img.shields.io/docker/image-size/rebeliptv/iptv/latest?style=for-the-badge&color=1D63ED)](https://hub.docker.com/r/rebeliptv/iptv)
+[![GitHub Release](https://img.shields.io/github/v/release/rebeliptv/iptv?style=for-the-badge&color=22C55E)](https://github.com/rebeliptv/iptv/releases/latest)
 [![License](https://img.shields.io/badge/license-proprietary-8B5CF6?style=for-the-badge)](LICENSE)
 
 Aggregates live TV channels and sports events into a single M3U playlist with full EPG guide data.<br>
@@ -106,7 +106,7 @@ The following leagues currently have working live event feeds:
 | **MLB** | Baseball          |
 | **MLS** | Soccer            |
 
-ESPN is the source of truth for all schedules, team names, and scores — scrapers only contribute stream URLs that are cross-referenced against ESPN's canonical game data. Other leagues will be added as upstream feeds become available. To request a new league, [open a feature request](https://github.com/rebelstream/iptv/issues/new/choose).
+ESPN is the source of truth for all schedules, team names, and scores — scrapers only contribute stream URLs that are cross-referenced against ESPN's canonical game data. Other leagues will be added as upstream feeds become available. To request a new league, [open a feature request](https://github.com/rebeliptv/iptv/issues/new/choose).
 
 ## Quick Start
 
@@ -117,7 +117,7 @@ Create a `docker-compose.yml`:
 ```yaml
 services:
     iptv:
-        image: rebelstream/iptv:latest
+        image: rebeliptv/iptv:latest
         container_name: iptv
         hostname: iptv          # lets clients on this compose network reach us by name
         ports:
@@ -142,7 +142,7 @@ docker run -d \
   -e TZ=America/New_York \
   -v ./data:/app/data \
   --restart unless-stopped \
-  rebelstream/iptv:latest
+  rebeliptv/iptv:latest
 ```
 
 ## Setting Up an API Key
@@ -316,7 +316,7 @@ labels:
 
 ## Reporting Issues
 
-Found a bug or want a feature? [Open an issue](https://github.com/rebelstream/iptv/issues/new/choose) using one of the templates:
+Found a bug or want a feature? [Open an issue](https://github.com/rebeliptv/iptv/issues/new/choose) using one of the templates:
 
 - **Bug Report** -- something isn't working
 - **Feature Request** -- suggest an improvement
