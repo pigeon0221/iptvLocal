@@ -171,7 +171,7 @@ Without a key, playlist and EPG are accessible to anyone on your network.
 
 **Recommended tuner settings:**
 - Allow stream sharing: **enabled**
-- Auto-loop live streams: **enabled**
+- Auto-loop live streams: **enabled** — important: this lets playback automatically reconnect after a server restart or update. Without it, the channel simply stops when the container restarts and the viewer has to re-tune manually.
 - Read input at native frame rate: **enabled**
 
 ### Plex
