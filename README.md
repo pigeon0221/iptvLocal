@@ -122,8 +122,11 @@ services:
         hostname: iptv          # lets clients on this compose network reach us by name
         ports:
             - "8080:8080"
-        environment:
-            TZ: "America/New_York"
+        # All environment variables are OPTIONAL — the defaults work out of
+        # the box. Uncomment any you need (see Configuration below):
+        # environment:
+        #     TZ: "America/New_York"   # set to YOUR timezone, e.g. Europe/London, America/Chicago, Etc/UTC
+        #     USE_PROXY: "true"        # only if providers are blocked in your region
         volumes:
             - iptv-data:/app/data
         restart: unless-stopped
@@ -142,10 +145,13 @@ docker compose up -d
 docker run -d \
   --name iptv \
   -p 8080:8080 \
-  -e TZ=America/New_York \
   -v iptv-data:/app/data \
   --restart unless-stopped \
   rebeliptv/iptv:latest
+
+# Environment variables are optional (defaults work). Add -e flags as needed, e.g.:
+#   -e TZ=America/New_York   (set to YOUR timezone — e.g. Europe/London, Etc/UTC)
+#   -e USE_PROXY=true        (only if providers are blocked in your region)
 ```
 
 ## Setting Up an API Key
