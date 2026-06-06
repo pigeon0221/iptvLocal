@@ -206,7 +206,7 @@ Access the dashboard at `http://<server-ip>:8080`.
 - **Channels** -- searchable and filterable channel list with category badges and online/offline status. Click a channel for its detail page with video player and program guide.
 - **Guide** -- horizontal timeline program grid with sticky channel column, current-time indicator, and scrollable schedule
 - **Sports** -- live and upcoming events grouped by date with team logos, live scores, and "Stream Not Available Yet" indicators for upcoming games. Click an event for its detail page with live scoreboard and video player.
-- **Settings** -- API key management, theme switcher, custom M3U source management, Docker container-hostname toggle for endpoint URLs, server info, version update check, targeted manual refresh (channels / guide / events / all)
+- **Settings** -- API key management, theme switcher, custom M3U source management, Docker container-hostname toggle for endpoint URLs, source-mode toggle (local scraping vs Rebel IPTV hosted feeds), server info, version update check, targeted manual refresh (channels / guide / events / all)
 
 ### Channel Detail
 
@@ -237,6 +237,8 @@ Click any sport event to see:
 | `TZ`            | `Etc/UTC`    | Timezone                                                                                                     |
 | `USE_PROXY`     | `false`      | Set to `true` if providers are blocked in your region — routes all source connections through Rebel IPTV's proxy so they resolve and connect from an unrestricted region (see [Blocked Sources](#blocked-sources)) |
 
+> **Source mode (local scraping vs hosted feeds)** is a dashboard setting, not an environment variable — see [Hosted Feeds](#hosted-feeds).
+
 ### Cron Schedule Examples
 
 | Schedule       | Meaning                                |
@@ -262,6 +264,30 @@ sources aren't restricted — so your instance can still reach them. It's
 off by default; leave it unset unless you're seeing sources fail to load
 because of a regional block. Only source traffic is proxied — the web
 dashboard, your playlist, and your guide are served directly as usual.
+
+### Hosted Feeds
+
+By default your instance builds everything itself — it scrapes the sources,
+assembles the playlist and guide, and proxies the streams. If you'd rather
+your box not run the scrapers at all, switch it to hosted feeds from the
+dashboard: **Settings → Source mode → "Use Rebel IPTV playlist"**.
+
+Your instance then pulls its channels, live sports events, and guide from
+Rebel IPTV's hosted service and serves them through your usual playlist,
+guide, and stream endpoints — so the feeds are assembled and kept healthy
+centrally instead of on your hardware. Nothing changes on the player side
+(Jellyfin/Plex/Emby keep working exactly as before); only where the feeds
+come from changes. In this mode there's no local scraping, so `USE_PROXY`
+has no effect. Leave the toggle off to keep your instance fully
+self-contained.
+
+Your channel lineup is the same either way. Channels carry the same IDs in
+both modes (they resolve against the same curated directory), so toggling
+doesn't reshuffle your lineup or break your client's channel mappings and
+bookmarks — only where the feeds come from changes. Switching takes effect
+live: your instance rebuilds its channels, guide, and events from the
+newly-selected source, and the toggle is disabled while that repopulates,
+re-enabling once it finishes.
 
 ## How It Works
 
