@@ -90,6 +90,8 @@ Designed for **Jellyfin**, **Plex**, **Emby**, and other IPTV apps.
 - Continuous MPEG-TS stream proxy (works like a real TV tuner for Jellyfin/ffmpeg)
 - Sport events sorted by start time with team logos and pregame/postgame EPG entries
 - API key protection for playlist and EPG endpoints
+- **Optional dashboard login** -- protect the dashboard with a username/password and add more admin accounts under Settings; leave it unset to keep the dashboard open on a trusted network
+- **Guided first-run setup** -- a wizard walks first-time users through choosing a channel source, an optional playlist key, an optional dashboard login, and connecting Jellyfin / Plex
 - Automatic hourly refresh with offline channel recovery every 5 minutes
 - Graceful shutdown with SIGTERM handling
 - Multi-architecture Docker support (amd64, arm64)
@@ -200,13 +202,15 @@ Without a key, playlist and EPG are accessible to anyone on your network.
 
 Access the dashboard at `http://<server-ip>:8080`.
 
+On first launch a short setup wizard walks you through choosing a channel source, optionally adding a playlist key, optionally setting a dashboard login, and copying your playlist / guide URLs into your player. You can skip it and change anything later in Settings.
+
 ### Pages
 
 - **Dashboard** -- channel/event counts, online/offline stats, live sports with start times and scores, playlist copy buttons
 - **Channels** -- searchable and filterable channel list with category badges and online/offline status. Click a channel for its detail page with video player and program guide.
 - **Guide** -- horizontal timeline program grid with sticky channel column, current-time indicator, and scrollable schedule
 - **Sports** -- live and upcoming events grouped by date with team logos, live scores, and "Stream Not Available Yet" indicators for upcoming games. Click an event for its detail page with live scoreboard and video player.
-- **Settings** -- API key management, theme switcher, custom M3U source management, Docker container-hostname toggle for endpoint URLs, source-mode toggle (local scraping vs Rebel IPTV hosted feeds), server info, version update check, targeted manual refresh (channels / guide / events / all)
+- **Settings** -- API key management, dashboard login & admin-account management, theme switcher, custom M3U source management, Docker container-hostname toggle for endpoint URLs, source-mode toggle (local scraping vs Rebel IPTV hosted feeds), server info, version update check, targeted manual refresh (channels / guide / events / all)
 
 ### Channel Detail
 
