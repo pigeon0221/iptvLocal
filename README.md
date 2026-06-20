@@ -128,7 +128,6 @@ services:
         # the box. Uncomment any you need (see Configuration below):
         # environment:
         #     TZ: "America/New_York"   # set to YOUR timezone, e.g. Europe/London, America/Chicago, Etc/UTC
-        #     USE_PROXY: "true"        # only if providers are blocked in your region
         volumes:
             - iptv-data:/app/data
         restart: unless-stopped
@@ -153,7 +152,6 @@ docker run -d \
 
 # Environment variables are optional (defaults work). Add -e flags as needed, e.g.:
 #   -e TZ=America/New_York   (set to YOUR timezone — e.g. Europe/London, Etc/UTC)
-#   -e USE_PROXY=true        (only if providers are blocked in your region)
 ```
 
 ## Setting Up an API Key
@@ -239,7 +237,6 @@ Click any sport event to see:
 | `SPORTS_MODE`   | `false`      | Sports-only mode — disables TV channels, serves only live events                                             |
 | `LEAGUES`       | `""`         | Comma-separated league codes (e.g. `NHL,NBA,MLB`) — empty means all                                          |
 | `TZ`            | `Etc/UTC`    | Timezone                                                                                                     |
-| `USE_PROXY`     | `false`      | Set to `true` if providers are blocked in your region — routes all source connections through Rebel IPTV's proxy so they resolve and connect from an unrestricted region (see [Blocked Sources](#blocked-sources)) |
 
 > **Source mode (local scraping vs hosted feeds)** is a dashboard setting, not an environment variable — see [Hosted Feeds](#hosted-feeds).
 
@@ -254,20 +251,10 @@ Click any sport event to see:
 
 ### Blocked Sources
 
-If some providers are blocked or geo-restricted in your region (or your
-network's DNS is poisoned for them), set `USE_PROXY=true`:
-
-```yaml
-        environment:
-            USE_PROXY: "true"
-```
-
-The app then routes **all source/provider connections** through Rebel
-IPTV's proxy, which resolves and connects from a region where those
-sources aren't restricted — so your instance can still reach them. It's
-off by default; leave it unset unless you're seeing sources fail to load
-because of a regional block. Only source traffic is proxied — the web
-dashboard, your playlist, and your guide are served directly as usual.
+If some providers are blocked or geo-restricted in your region, switch to
+[Hosted Feeds](#hosted-feeds) (Settings → Source mode). Your instance then
+pulls ready-made channels, guide, and events from Rebel IPTV instead of
+scraping the blocked providers itself, so regional blocks no longer matter.
 
 ### Hosted Feeds
 
@@ -281,9 +268,8 @@ Rebel IPTV's hosted service and serves them through your usual playlist,
 guide, and stream endpoints — so the feeds are assembled and kept healthy
 centrally instead of on your hardware. Nothing changes on the player side
 (Jellyfin/Plex/Emby keep working exactly as before); only where the feeds
-come from changes. In this mode there's no local scraping, so `USE_PROXY`
-has no effect. Leave the toggle off to keep your instance fully
-self-contained.
+come from changes. In this mode there's no local scraping. Leave the
+toggle off to keep your instance fully self-contained.
 
 Your channel lineup is the same either way. Channels carry the same IDs in
 both modes (they resolve against the same curated directory), so toggling
