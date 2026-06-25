@@ -73,6 +73,7 @@ Designed for **Jellyfin**, **Plex**, **Emby**, and other IPTV apps.
 - **380+ TV channels** with logos and persistent channel numbers that never reshuffle
 - **Live sports events** -- see [Supported Live Sports](#supported-live-sports) below
 - **Custom M3U sources** -- add your own M3U URLs or upload files to merge into the playlist; edit the URL or replace the uploaded file later without losing channel numbers
+- **Customize your lineup** -- enable/disable channels and drag to reorder them from the dashboard; disabled channels drop out of your playlist and guide, and both choices persist across restarts and upgrades
 - **Channel categories** -- Sports, News, Local, Kids, Movies, Entertainment, Lifestyle, Documentary, and more
 - **Local station detection** -- identifies call signs (KABC, WCBS, etc.)
 - **Multi-source stream fallback** -- events and channels automatically try alternate providers if the primary feed fails, both at refresh time and mid-watch
@@ -208,7 +209,7 @@ On first launch a short setup wizard walks you through choosing a channel source
 - **Channels** -- searchable and filterable channel list with category badges and online/offline status. Click a channel for its detail page with video player and program guide.
 - **Guide** -- horizontal timeline program grid with sticky channel column, current-time indicator, and scrollable schedule
 - **Sports** -- live and upcoming events grouped by date with team logos, live scores, and "Stream Not Available Yet" indicators for upcoming games. Click an event for its detail page with live scoreboard and video player.
-- **Settings** -- API key management, dashboard login & admin-account management, theme switcher, custom M3U source management, Docker container-hostname toggle for endpoint URLs, source-mode toggle (local scraping vs Rebel IPTV hosted feeds), server info, version update check, targeted manual refresh (channels / guide / events / all)
+- **Settings** -- API key management, dashboard login & admin-account management, theme switcher, custom M3U source management, channel lineup management (enable/disable and drag-to-reorder), Docker container-hostname toggle for endpoint URLs, source-mode toggle (local scraping vs Rebel IPTV hosted feeds), server info, version update check, targeted manual refresh (channels / guide / events / all)
 
 ### Channel Detail
 
@@ -292,6 +293,8 @@ Channel numbers are **stable** — every channel has a fixed number baked into t
 | 1–4999 | Curated broadcast networks and cable channels |
 | 5000+  | Live sports events (assigned per refresh)     |
 | 10000+ | Custom M3U sources (one range per source)     |
+
+From **Settings → Channel Lineup** you can disable channels you don't watch (they drop out of your playlist, guide, and counts) and drag the rest into your own order. These are per-instance preferences saved with your data and layered on top of the built-in numbers, so they persist across restarts and upgrades.
 
 Local broadcast stations are identified by their FCC call sign. For example, "ABC (KABC) Los Angeles" becomes **KABC (Los Angeles, CA)** with affiliate **ABC**, and is rendered as a dynamic SVG showing the ABC network logo with the call sign and city overlay.
 
