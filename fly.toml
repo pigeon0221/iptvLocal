@@ -1,0 +1,14 @@
+app = "iptvlocal"
+
+[build]
+  image = "rebeliptv/iptv:latest"
+
+[http_service]
+  internal_port = 8080
+  force_https = true
+
+  [[http_service.ports]]
+    port = 80
+
+  [[http_service.ports]]
+    port = 443
